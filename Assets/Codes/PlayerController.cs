@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         //holen ein Vector2 aus dem _look 
         Vector2 lookInput = _look.ReadValue<Vector2>();
         Vector3 cameraRotation = Camera.rotation.eulerAngles;
-        _cameraXRotation += lookInput.y;
+        _cameraXRotation -= lookInput.y;
         
         //Rotation einschränken
         _cameraXRotation = Mathf.Clamp(_cameraXRotation, 0, 60);
@@ -129,9 +129,11 @@ public class PlayerController : MonoBehaviour
         }
          //interactable
          Interactable inter = other.GetComponent<Interactable>();
-         if (inter != null)
-         {
-             CurrentInteractable = inter;
+         if (inter != null){
+            if(CurrentInteractable != null)
+                CurrentInteractable.DeHighlight();             
+            CurrentInteractable = inter;
+            CurrentInteractable.Highlight();
          }
     }
 
@@ -140,6 +142,7 @@ public class PlayerController : MonoBehaviour
         Interactable inter = other.GetComponent<Interactable>();
         if (inter != null)
         {
+            inter.DeHighlight();
             CurrentInteractable = null;
         }
     }
