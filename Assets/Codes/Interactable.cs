@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Interactable : MonoBehaviour
     public Material normalMaterial;
     public Material highlightMaterial;
 
+    public UnityEvent onInteracted;
+
     private void Start()
     {
         _renderer = GetComponent<MeshRenderer>();
@@ -19,6 +22,7 @@ public class Interactable : MonoBehaviour
 
     public void Interact()
     {
+        onInteracted.Invoke();
         dialogScreen.StartDialog(item);    
     }
 
@@ -30,5 +34,10 @@ public class Interactable : MonoBehaviour
     public void DeHighlight()
     {
         _renderer.material = normalMaterial;
+    }
+    //setzt welches Dialog gestartet wird
+    public void SetDialog(DialogItem newDialog)
+    {
+        item = newDialog;
     }
 }

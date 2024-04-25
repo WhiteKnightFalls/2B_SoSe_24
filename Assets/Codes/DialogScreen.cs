@@ -59,6 +59,8 @@ public class DialogScreen : MonoBehaviour
     public void ChooseOption(int index)
     {
         DialogOption option = _currentItem.options[index];
+        //Invoke=Auslösen
+        option.onOptionSelected.Invoke();
 
         if (option.nextDialog != null)
         {
