@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController Controller;
     public Transform Camera;
     public float Speed = 10f;
+    public Animator animator;
 
     public float Gravity = -9.8f; // m/s/s für Schwerkraft berechnen
 
@@ -61,6 +62,8 @@ public class PlayerController : MonoBehaviour
         {
             _velocity.y = 0;
         }
+        
+        animator.SetFloat("speed", _velocity.magnitude);
         
 
      
