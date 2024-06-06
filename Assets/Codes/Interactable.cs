@@ -6,10 +6,7 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     private MeshRenderer _renderer;
-    
-    public DialogScreen dialogScreen;
-    public DialogItem item;
-
+    //- - - - - - - - - - - - - - - - - - - - - 
     public Material normalMaterial;
     public Material highlightMaterial;
 
@@ -23,7 +20,6 @@ public class Interactable : MonoBehaviour
     public void Interact()
     {
         onInteracted.Invoke();
-        dialogScreen.StartDialog(item);    
     }
 
     public void Highlight()
@@ -35,9 +31,5 @@ public class Interactable : MonoBehaviour
     {
         _renderer.material = normalMaterial;
     }
-    //setzt welches Dialog gestartet wird
-    public void SetDialog(DialogItem newDialog)
-    {
-        item = newDialog;
-    }
+    
 }

@@ -2,16 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using FMODUnity;
 using UnityEngine.Rendering;
 
 public class DialogScreen : MonoBehaviour
 {
     private DialogItem _currentItem;
-    
+    //- - - - - - - - - - - - - - - - - - - - - -
     public TMP_Text textBox;
     public GameObject container;
     public List<GameObject> buttons;
-         
+    public UnityEvent<bool> dialogOpen; //wenn Dialogscreen geöffnet ist = true/ wenn nciht = false
+  
+
+    public StudioEventEmitter emitter;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,11 +54,18 @@ public class DialogScreen : MonoBehaviour
         }
 
         _currentItem = item;
+        
+        dialogOpen.Invoke (true);
+        //Event Rain wird im Dialog nicht abgespielt
+        emitter.EventInstance.setParameterByName("Rain", 0);
     }
 
     public void EndDialog()
     {
         container.SetActive(false);
+        dialogOpen.Invoke(false);
+        //Event Rain wird im Dialog wieder abgespielt
+        emitter.EventInstance.setParameterByName("Rain", 0);
     }
 
     public void ChooseOption(int index)

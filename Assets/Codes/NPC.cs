@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
+    public DialogScreen dialogScreen;
+    public DialogItem item;
+    
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartDialog()
     {
-        
+        dialogScreen.StartDialog(item); 
+    }
+    //setzt welches Dialog gestartet wird
+    public void SetDialog(DialogItem newItem)
+    {
+        item = newItem;
     }
 }

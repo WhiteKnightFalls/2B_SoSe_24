@@ -26,7 +26,12 @@ public class PlayerController : MonoBehaviour
     public float Gravity = -9.8f; // m/s/s für Schwerkraft berechnen
 
     public Interactable CurrentInteractable;
-    
+
+    public void DisableInput(bool disabled) //invert bool/ Player kann sich im Dialogfenster nicht bewegen
+    {
+        PlayerInput.enabled = !disabled;
+    }
+
     // Start is called before the first frame update
     void Start()
     {   //in Visuel Scripting gibt es ein drop down, mit action finden und variable speichern
@@ -35,6 +40,15 @@ public class PlayerController : MonoBehaviour
         _interact = PlayerInput.actions.FindAction("Interact");
 
         _cameraXRotation = Camera.rotation.eulerAngles.x;
+
+        /*Wenn Player dynamisch spawnt z.B. für towerdefense gegner spawnen
+        DialogScreen dialogScreen = FindFirstObjectByType<DialogScreen>();
+        dialogScreen.dialogOpen.AddListener(DisableInput);
+        
+        private void OnDestroy() {
+        DialogScreen dialogScreen = FindFirstObjectByType<DialogScreen>();
+        dialogScreen.dialogOpen.RemoveListener(DisableInput);
+        */
     }
 
     // Update is called once per frame
