@@ -7,19 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    private EventInstance _musicInstance;
+   public static EventInstance _musicInstance;
 
     public EventReference musicEvent;
     // Start is called before the first frame update
     void Start()
     {
-        //spielt sound noch nicht ab, erstellt nur instance
-        _musicInstance = RuntimeManager.CreateInstance(musicEvent);
-        _musicInstance.start();
+        if (!_musicInstance.hasHandle())
+        {
+            //spielt sound noch nicht ab, erstellt nur instance
+            _musicInstance = RuntimeManager.CreateInstance(musicEvent);
+            _musicInstance.start();
+        }
     }
 
     public void StartGame(){
-        //Name des Parameters
+        //Name des Parameters, Muisk wird gewechselt von scene to level
         _musicInstance.setParameterByNameWithLabel("Scene", "Level");
         SceneManager.LoadScene(1);
     }
